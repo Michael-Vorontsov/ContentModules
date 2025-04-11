@@ -36,8 +36,20 @@ final class TableBuilder: UIBuilder {
 
 }
 
+
+var factory: ViewFactory = {
+    let factory = ViewFactory()
+    factory.builders = [
+        AmenityBuilder(),
+        ImageBuilder(),
+        GalleryBuilder(contentBuilder: factory),
+        TableBuilder(contentBuilder: factory)
+    ]
+    return factory
+}()
+
 #Preview {
-    let view = TableBuilder(contentBuilder: AmenityBuilder()).view(
+    let view = TableBuilder(contentBuilder: factory).view(
         for: TableState(
             content: [
                 AmenityState(

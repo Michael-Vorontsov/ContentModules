@@ -12,7 +12,7 @@ protocol TablePresentableState: ViewState {
     var id: UUID { get }
 }
 
-class TableState: ViewState, GalleryPresentableState {
+final class TableState: ObservableObject, ViewState, GalleryPresentableState {
     let id = UUID()
 
     internal init(content: [any TablePresentableState]) {
@@ -20,6 +20,6 @@ class TableState: ViewState, GalleryPresentableState {
     }
 
     @Published var content: [any TablePresentableState]
-    @Published var visible: ([any TablePresentableState], Range<Int>)?
-    @Published var selected: (any TablePresentableState, Int)?
+//    @Published var visible: ([any TablePresentableState], Range<Int>)?
+//    @Published var selected: (any TablePresentableState, Int)?
 }
