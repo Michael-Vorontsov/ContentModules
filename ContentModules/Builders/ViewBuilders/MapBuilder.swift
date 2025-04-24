@@ -8,37 +8,61 @@
 import SwiftUI
 import MapKit
 
-//final class MapBuilder: UIBuilder {
-//    internal init(contentBuilder: any MapContentBuilding) {
-//        self.contentBuilder = contentBuilder
-//    }
-//    
-//    let contentBuilder: MapContentBuilding
-//    @State var region: MKCoordinateRegion
-//
-//    func view(for viewState: any ViewState) -> (any View)? {
-//        guard let state = viewState as? MapState else { return nil }
-//
-//        let erasedAnnotations =  state.content.map { AnyMapAnnotation(content: $0) }
-//        let annotations =  state.content.map { contentBuilder.annotation(for: $0) }
-//
-//        return Map(
-//            coordinateRegion: $region,
-//            annotationItems: erasedAnnotations,
-//            annotationContent: { [contentBuilder] state in
-//                let view = contentBuilder.annotation(for: state.content) ?? EmptyView()
-//                return AnyView(view)
-//            }
-//        )
-//    }
-//
-//}
-//
-//struct AnyMapAnnotation: Identifiable {
-//    var id: UUID { content.id }
-//    let content: any MapPresentableState
-//
-//}
-//
-//
-//
+final class MapBuilder: @preconcurrency UIBuilder {
+    internal init(contentBuilder: any MapContentBuilding) {
+        self.contentBuilder = contentBuilder
+    }
+    
+    let contentBuilder: MapContentBuilding
+
+    @MainActor
+    func view(for viewState: any ViewState) -> (any View)? {
+        guard let state = viewState as? MapState else { return nil }
+
+        return Map {
+            ForEach(state.content, id:\.id) { item in
+                self.contentBuilder.annotation(for: item)
+            }
+        }
+    }
+
+}
+
+struct AnyMapAnnotation: Identifiable {
+
+    var id: UUID { content.id }
+    let content: any MapPresentableState
+
+}
+
+
+#Preview {
+    let view = MapBuilder(
+        contentBuilder: FlagBuilder()
+    )
+        .view(
+            for: MapState(
+                content: [
+                    FlagMapState(
+                        coordinate: Coordinate.london,
+                        name: "London",
+                        color: .init(hex: 0x0000ff)
+                    ),
+                    FlagMapState(
+                        coordinate: Coordinate.tokyo,
+                        name: "Tokyo",
+                        color: .init(hex: 0xff00f0)
+                    )
+
+                ]
+            )
+        ) ?? EmptyView()
+    view
+}
+
+extension Coordinate {
+    static let london = Coordinate(latitude: 51.5074, longitude: -0.1278)
+    static let singapore = Coordinate(latitude: 1.3521, longitude: 103.8198)
+    static let birmingham = Coordinate(latitude: 52.4862, longitude: -1.8904)
+    static let tokyo = Coordinate(latitude: 35.6762, longitude: 139.6503)
+}

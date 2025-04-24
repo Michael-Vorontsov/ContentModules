@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 protocol MapContentBuilding {
-    func annotation(for viewState: MapPresentableState) -> (any MapAnnotationProtocol)?
+    func annotation(for viewState: any MapPresentableState) -> (AnyMapContent)?
 
 //    func view(for annotation: MapPresentableState) -> (any View)?
 }

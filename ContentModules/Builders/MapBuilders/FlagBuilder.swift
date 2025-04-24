@@ -9,10 +9,13 @@ import SwiftUI
 import MapKit
 
 class FlagBuilder: MapContentBuilding {
-    func annotation(for viewState: any MapPresentableState) -> (any MapAnnotationProtocol)? {
+    func annotation(for viewState: any MapPresentableState) -> (AnyMapContent)? {
         guard let state = viewState as? FlagMapState else { return nil }
 
-        return MapMarker(coordinate: state.coordinate, tint: SwiftUI.Color(state.color))
+        return AnyMapContent( Marker(coordinate: state.coordinate) {
+            Text(state.name)
+        }
+        .tint(SwiftUI.Color(state.color)))
     }
     
     

@@ -9,13 +9,18 @@ import Foundation
 import CoreLocation
 
 final class MapState: ViewState {
+    internal init(content: [any MapPresentableState] = [], zoomLevel: Int = 0) {
+        self.content = content
+        self.zoomLevel = zoomLevel
+    }
+    
     var content: [any MapPresentableState] = []
 
     @Published var zoomLevel: Int = 0
 }
 
 
-protocol MapPresentableState: ViewState {
+protocol MapPresentableState: Hashable, ViewState, Identifiable {
     var id: UUID { get }
 }
 
@@ -29,6 +34,17 @@ struct FlagMapState: MapPresentableState {
 
 typealias Coordinate = CLLocationCoordinate2D
 
-struct Color {
+extension Coordinate: @retroactive Hashable {
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(latitude)
+        hasher.combine(longitude)
+    }
+    
+    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
+}
+
+struct Color: Hashable {
     let hex: Int
 }

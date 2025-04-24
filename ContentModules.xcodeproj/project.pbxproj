@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CA74D122DBA552D00BE1336 /* MapContentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA74D112DBA551E00BE1336 /* MapContentFactory.swift */; };
 		4CAE89A32D9D8E1300AEE2C1 /* ContentModulesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAE89A02D9D8E1300AEE2C1 /* ContentModulesApp.swift */; };
 		4CAE89A42D9D8E1300AEE2C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAE89A12D9D8E1300AEE2C1 /* ContentView.swift */; };
 		4CAE89A52D9D8E1300AEE2C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CAE899E2D9D8E1300AEE2C1 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4CA74D112DBA551E00BE1336 /* MapContentFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContentFactory.swift; sourceTree = "<group>"; };
 		4CAE89732D9D8DA600AEE2C1 /* ContentModules.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContentModules.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CAE89812D9D8DA800AEE2C1 /* ContentModulesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContentModulesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CAE898B2D9D8DA800AEE2C1 /* ContentModulesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContentModulesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,6 +212,7 @@
 		4CAE89CE2D9EA5B000AEE2C1 /* MapBuilders */ = {
 			isa = PBXGroup;
 			children = (
+				4CA74D112DBA551E00BE1336 /* MapContentFactory.swift */,
 				4CAE89D12D9EA65B00AEE2C1 /* FlagBuilder.swift */,
 				4CAE89CF2D9EA5BE00AEE2C1 /* MapContentBuilding.swift */,
 			);
@@ -358,6 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CA74D122DBA552D00BE1336 /* MapContentFactory.swift in Sources */,
 				4CAE89D92D9EB14400AEE2C1 /* MessageBuilder.swift in Sources */,
 				4CAE89CB2D9EA31100AEE2C1 /* MapBuilder.swift in Sources */,
 				4CAE89BF2D9E83B600AEE2C1 /* TableBuilder.swift in Sources */,
