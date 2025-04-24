@@ -12,24 +12,27 @@ import ContentModulesPackage
 
 @main
 struct ContentModulesApp: App {
-    let viewModel = FakeViewModel()
+    let viewModel = SampleSearchWidgetModel()
 
     let viewFactory: ViewFactory = {
         let factory = ViewFactory()
         factory.builders = [
             AmenityBuilder(),
             ImageBuilder(),
+            SearchBuilder(contentBuilder: factory),
             GalleryBuilder(contentBuilder: factory),
             TableBuilder(contentBuilder: factory),
-            MessageBuilder()
+            MessageBuilder(),
         ]
         return factory
     }()
 
     var body: some Scene {
         WindowGroup {
-            let view = viewFactory.view(for: viewModel.state) ?? EmptyView()
-            AnyView(view)
+            ScrollView(.vertical) {
+                let view = viewFactory.view(for: viewModel.searchState) ?? EmptyView()
+                AnyView(view)
+            }
         }
     }
 }

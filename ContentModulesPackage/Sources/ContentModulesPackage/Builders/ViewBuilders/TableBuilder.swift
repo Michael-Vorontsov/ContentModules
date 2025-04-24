@@ -21,7 +21,7 @@ final public class TableBuilder: UIBuilder {
 
     public func view(for viewState: any ViewState) -> (any View)? {
         guard let state = viewState as? TableState else {
-            return EmptyView()
+            return nil
         }
 
         let wrappedContent  = state.content.map { TableContent(content: $0) }

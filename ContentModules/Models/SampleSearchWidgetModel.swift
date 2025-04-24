@@ -13,15 +13,38 @@ class SampleSearchModel {
     private let geocoder = CLGeocoder()
 
     func search(query: String, completion: @escaping (Result<[CLPlacemark], Error>) -> Void) {
-        geocoder.geocodeAddressString(query) { placemarks, error in
-            if let error = error {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = query  // e.g., "coffee", "museum"
+        request.region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 51.0, longitude: 0),
+            latitudinalMeters: 50000,
+            longitudinalMeters: 50000
+        )
+
+        let search = MKLocalSearch(request: request)
+        search.start { response, error in
+            if let error {
                 print("Geocoding error: \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }
-
-            completion(.success(placemarks ?? []))
+            guard let response = response else {
+                completion(.failure(NSError(domain: "no response", code: 1)))
+                print("Search error: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            let placemarks = response.mapItems.map { $0.placemark }
+            completion(.success(placemarks))
         }
+//        geocoder.geocodeAddressString(query) { placemarks, error in
+//            if let error = error {
+//                print("Geocoding error: \(error.localizedDescription)")
+//                completion(.failure(error))
+//                return
+//            }
+//
+//            completion(.success(placemarks ?? []))
+//        }
     }
 }
 
@@ -31,9 +54,14 @@ class SampleSearchWidgetModel {
     let model = SampleSearchModel()
     var bag: Set<AnyCancellable> = []
 
+    init() {
+        ready()
+    }
+
     func ready() {
         searchState.$query
             .debounce(for: 3.0, scheduler: RunLoop.main)
+            .filter{ !$0.isEmpty }
             .sink { [weak self] query in
                 guard let self else { return }
 

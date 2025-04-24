@@ -1,6 +1,6 @@
 import Combine
 
-public class SearchState: ObservableObject {
+public class SearchState: ObservableObject, ViewState {
     public init(query: String = "", result: (any SearchResultState)? = nil) {
         self.query = query
         self.result = result

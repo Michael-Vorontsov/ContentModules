@@ -15,6 +15,7 @@ struct SearchView: View {
     var body: some View {
         VStack {
             TextField("Search", text: $state.query)
+                .padding()
             if let result = state.result {
                 let view = viewBuilder.view(for: result) ?? EmptyView()
                 AnyView(view)
