@@ -23,6 +23,7 @@ struct ContentModulesApp: App {
             GalleryBuilder(contentBuilder: factory),
             TableBuilder(contentBuilder: factory),
             MessageBuilder(),
+            HomeBuilder()
         ]
         return factory
     }()
