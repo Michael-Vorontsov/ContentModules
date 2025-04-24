@@ -57,6 +57,12 @@ class HomeWidgetModel {
 //            .assign(to: \.content, on: mapState)
 //            .store(in: &bag)
         searchWidget.$mapContent
+            .combineLatest(exploreWidget.$mapContent)
+            .map {
+                var a = $0.0
+                a.append(contentsOf: $0.1)
+                return a
+            }
             .sink {[unowned self] in
                 mapState.content = $0
             }

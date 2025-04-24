@@ -70,6 +70,7 @@ class SampleSearchWidgetModel {
             .sink { [unowned self] query in
                 guard !query.isEmpty else {
                     self.searchState.result = MessageState(title: "Search", message: "Please type in")
+                    self.mapContent = []
                     self.actrive = false
                     return
                 }

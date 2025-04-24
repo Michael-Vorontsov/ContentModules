@@ -40,7 +40,7 @@ struct HomeView: View {
 //                        width: geometry.size.width,
 //                        height: geometry.size.height / 3,
 //                    )
-                    .background(.green)
+//                    .background(.green)
 //                    .offset(y: geometry.size.height * 2/3)
                 }
             }
