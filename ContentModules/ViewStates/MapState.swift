@@ -17,6 +17,7 @@ final class MapState: ViewState {
     var content: [any MapPresentableState] = []
 
     @Published var zoomLevel: Int = 0
+    @Published var selected: (any MapPresentableState)?
 }
 
 

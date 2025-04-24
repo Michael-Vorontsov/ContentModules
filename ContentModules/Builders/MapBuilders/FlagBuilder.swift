@@ -12,12 +12,14 @@ class FlagBuilder: MapContentBuilding {
     func annotation(for viewState: any MapPresentableState) -> (AnyMapContent)? {
         guard let state = viewState as? FlagMapState else { return nil }
 
-        return AnyMapContent( Marker(coordinate: state.coordinate) {
-            Text(state.name)
-        }
-        .tint(SwiftUI.Color(state.color)))
+        return AnyMapContent(
+            Marker(coordinate: state.coordinate) {
+                Text(state.name)
+            }
+            .tint(SwiftUI.Color(state.color))
+        )
     }
-    
+
     
 }
 
@@ -31,4 +33,28 @@ extension SwiftUI.Color {
 
         self.init(red: red, green: green, blue: blue)
     }
+}
+
+#Preview {
+    let view = MapBuilder(
+        contentBuilder: FlagBuilder()
+    )
+        .view(
+            for: MapState(
+                content: [
+                    FlagMapState(
+                        coordinate: Coordinate.london,
+                        name: "London",
+                        color: .init(hex: 0x0000ff)
+                    ),
+                    FlagMapState(
+                        coordinate: Coordinate.birmingham,
+                        name: "birmingham",
+                        color: .init(hex: 0xff00f0)
+                    )
+
+                ]
+            )
+        ) ?? EmptyView()
+    view
 }

@@ -19,11 +19,7 @@ final class MapBuilder: @preconcurrency UIBuilder {
     func view(for viewState: any ViewState) -> (any View)? {
         guard let state = viewState as? MapState else { return nil }
 
-        return Map {
-            ForEach(state.content, id:\.id) { item in
-                self.contentBuilder.annotation(for: item)
-            }
-        }
+        return MapView(contentBuilder: contentBuilder, state: state)
     }
 
 }
