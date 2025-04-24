@@ -35,18 +35,6 @@ final public class TableBuilder: UIBuilder {
 
 }
 
-
-@MainActor private let factory: ViewFactory = {
-    let factory = ViewFactory()
-    factory.builders = [
-        AmenityBuilder(),
-        ImageBuilder(),
-        GalleryBuilder(contentBuilder: factory),
-        TableBuilder(contentBuilder: factory)
-    ]
-    return factory
-}()
-
 #Preview {
     let view = TableBuilder(contentBuilder: factory).view(
         for: TableState(

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct AmenityState: ViewState, TablePresentableState {
-    public init(id: UUID = UUID(), name: String, address: String, icon: URL) {
+    public init(id: UUID = UUID(), name: String, address: String, icon: URL = URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!) {
         self.id = id
         self.name = name
         self.address = address
