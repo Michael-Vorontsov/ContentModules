@@ -7,8 +7,10 @@
 
 import SwiftUI
 
-final class ImageBuilder: UIBuilder {
-    func view(for viewState: any ViewState) -> (any View)? {
+public final class ImageBuilder: UIBuilder {
+    public init() {}
+
+    public func view(for viewState: any ViewState) -> (any View)? {
         guard let state = viewState as? ImageState else { return nil }
 
         return AsyncImage(url: state.url){ result in

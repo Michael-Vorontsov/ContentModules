@@ -7,20 +7,19 @@
 
 import SwiftUI
 
-final class TableBuilder: UIBuilder {
+final public class TableBuilder: UIBuilder {
+    public struct TableContent: Identifiable {
+        public let content: TablePresentableState
 
-    struct TableContent: Identifiable {
-        let content: TablePresentableState
-
-        var id: UUID { content.id }
+        public var id: UUID { content.id }
     }
 
-    internal init(contentBuilder: any UIBuilder) {
+    public  init(contentBuilder: any UIBuilder) {
         self.contentBuilder = contentBuilder
     }
-    let contentBuilder: UIBuilder
+    public let contentBuilder: UIBuilder
 
-    func view(for viewState: any ViewState) -> (any View)? {
+    public func view(for viewState: any ViewState) -> (any View)? {
         guard let state = viewState as? TableState else {
             return EmptyView()
         }
@@ -37,7 +36,7 @@ final class TableBuilder: UIBuilder {
 }
 
 
-var factory: ViewFactory = {
+@MainActor private let factory: ViewFactory = {
     let factory = ViewFactory()
     factory.builders = [
         AmenityBuilder(),

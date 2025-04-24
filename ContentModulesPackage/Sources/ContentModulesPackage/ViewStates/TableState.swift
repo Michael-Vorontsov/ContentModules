@@ -8,18 +8,18 @@
 import Combine
 import Foundation
 
-protocol TablePresentableState: ViewState {
+public protocol TablePresentableState: ViewState {
     var id: UUID { get }
 }
 
-final class TableState: ObservableObject, ViewState, GalleryPresentableState {
-    let id = UUID()
+public final class TableState: ObservableObject, ViewState, GalleryPresentableState {
+    public let id = UUID()
 
-    internal init(content: [any TablePresentableState]) {
+    public  init(content: [any TablePresentableState]) {
         self.content = content
     }
 
-    @Published var content: [any TablePresentableState]
+    @Published public var content: [any TablePresentableState]
 //    @Published var visible: ([any TablePresentableState], Range<Int>)?
 //    @Published var selected: (any TablePresentableState, Int)?
 }

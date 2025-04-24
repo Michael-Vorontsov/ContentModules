@@ -7,6 +7,7 @@
 import MapKit
 import CoreLocation
 import Combine
+import ContentModulesPackage
 
 class SampleSearchModel {
     private let geocoder = CLGeocoder()

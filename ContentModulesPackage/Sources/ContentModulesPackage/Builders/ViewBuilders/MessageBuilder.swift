@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-class MessageBuilder: UIBuilder {
+public class MessageBuilder: UIBuilder {
 
-    func view(for viewState: any ViewState) -> (any View)? {
+    public init() {} 
+
+    public func view(for viewState: any ViewState) -> (any View)? {
         guard let state = viewState as? MessageState else { return nil }
 
         return  VStack {

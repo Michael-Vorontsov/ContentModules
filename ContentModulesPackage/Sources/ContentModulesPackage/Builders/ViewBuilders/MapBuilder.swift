@@ -8,15 +8,15 @@
 import SwiftUI
 import MapKit
 
-final class MapBuilder: @preconcurrency UIBuilder {
-    internal init(contentBuilder: any MapContentBuilding) {
+public final class MapBuilder: UIBuilder {
+    init(contentBuilder: any MapContentBuilding) {
         self.contentBuilder = contentBuilder
     }
     
     let contentBuilder: MapContentBuilding
 
-    @MainActor
-    func view(for viewState: any ViewState) -> (any View)? {
+
+    public func view(for viewState: any ViewState) -> (any View)? {
         guard let state = viewState as? MapState else { return nil }
 
         return MapView(contentBuilder: contentBuilder, state: state)
@@ -24,12 +24,12 @@ final class MapBuilder: @preconcurrency UIBuilder {
 
 }
 
-struct AnyMapAnnotation: Identifiable {
-
-    var id: UUID { content.id }
-    let content: any MapPresentableState
-
-}
+//public struct AnyMapAnnotation: Identifiable {
+//
+//    var id: UUID { content.id }
+//    let content: any MapPresentableState
+//
+//}
 
 
 #Preview {

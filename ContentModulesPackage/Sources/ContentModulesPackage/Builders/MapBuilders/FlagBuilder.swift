@@ -8,8 +8,8 @@
 import SwiftUI
 import MapKit
 
-class FlagBuilder: MapContentBuilding {
-    func annotation(for viewState: any MapPresentableState) -> (AnyMapContent)? {
+public class FlagBuilder: MapContentBuilding {
+    public func annotation(for viewState: any MapPresentableState) -> (AnyMapContent)? {
         guard let state = viewState as? FlagMapState else { return nil }
 
         return AnyMapContent(

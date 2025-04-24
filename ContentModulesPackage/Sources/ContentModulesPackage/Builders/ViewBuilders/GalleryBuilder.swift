@@ -7,20 +7,21 @@
 
 import SwiftUI
 
-final class GalleryBuilder: UIBuilder {
+public final class GalleryBuilder: UIBuilder {
 
-    struct GalleryContent: Identifiable {
-        let content: GalleryPresentableState
+    public struct GalleryContent: Identifiable {
+        public let content: GalleryPresentableState
 
-        var id: UUID { content.id }
+        public var id: UUID { content.id }
     }
 
-    internal init(contentBuilder: any UIBuilder) {
+    public init(contentBuilder: any UIBuilder) {
         self.contentBuilder = contentBuilder
     }
-    let contentBuilder: UIBuilder
 
-    func view(for viewState: any ViewState) -> (any View)? {
+    public let contentBuilder: UIBuilder
+
+    public func view(for viewState: any ViewState) -> (any View)? {
         guard let state = viewState as? GalleryState else {
             return nil
         }
