@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 
 public class FlagBuilder: MapContentBuilding {
+    public init() {}
+    
     public func annotation(for viewState: any MapPresentableState) -> (AnyMapContent)? {
         guard let state = viewState as? FlagMapState else { return nil }
 

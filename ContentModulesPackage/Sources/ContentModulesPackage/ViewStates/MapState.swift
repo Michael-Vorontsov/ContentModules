@@ -8,13 +8,13 @@ import Combine
 import Foundation
 import CoreLocation
 
-public final class MapState: ViewState {
+public final class MapState: ObservableObject, ViewState {
     public  init(content: [any MapPresentableState] = [], zoomLevel: Int = 0) {
         self.content = content
         self.zoomLevel = zoomLevel
     }
     
-    public var content: [any MapPresentableState] = []
+    @Published public var content: [any MapPresentableState] = []
 
     @Published public var zoomLevel: Int = 0
     @Published public var selected: (any MapPresentableState)?
@@ -27,6 +27,12 @@ public protocol MapPresentableState: Hashable, ViewState, Identifiable {
 
 
 public struct FlagMapState: MapPresentableState {
+    public init(coordinate: Coordinate, name: String, color: Color) {
+        self.coordinate = coordinate
+        self.name = name
+        self.color = color
+    }
+    
     public let id = UUID()
     public let coordinate: Coordinate
     public let name: String

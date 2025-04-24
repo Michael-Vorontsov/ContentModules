@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import Combine
 
-public class HomeState {
+public class HomeState: ObservableObject, ViewState {
     public init(mapState: MapState, contentState: any ViewState) {
         self.mapState = mapState
         self.contentState = contentState
@@ -19,7 +20,7 @@ public class HomeState {
 
 struct HomeView: View {
     let builder: UIBuilder
-    let state: HomeState
+    @ObservedObject var state: HomeState
 
     var body: some View {
         ZStack {
@@ -48,12 +49,13 @@ struct HomeView: View {
 }
 
 
-
 #Preview {
     HomeView(
         builder: factory,
         state: HomeState(
-            mapState: MapState(content: []),
+            mapState: MapState(content: [
+                FlagMapState(coordinate: .london, name: "London", color: Color(hex: 0xff0000))
+            ]),
 //            contentState: MessageState(title: "hello", message: "world!")
             contentState: TableState(
                 content:  [

@@ -9,8 +9,8 @@ import SwiftUI
 import MapKit
 import ContentModulesPackage
 
-struct ContentView: View {
-    let viewModel = SampleSearchWidgetModel()
+struct HomeWrapperView: View {
+    let viewModel = HomeWidgetModel()
 
     let viewFactory: ViewFactory = {
         let factory = ViewFactory()
@@ -21,6 +21,7 @@ struct ContentView: View {
             GalleryBuilder(contentBuilder: factory),
             TableBuilder(contentBuilder: factory),
             MessageBuilder(),
+            MapBuilder(contentBuilder: FlagBuilder()),
             HomeBuilder(contentBuilder: factory)
         ]
         return factory
@@ -28,13 +29,13 @@ struct ContentView: View {
 
 
     var body: some View {
-        ScrollView(.vertical) {
-            let view = viewFactory.view(for: viewModel.searchState) ?? EmptyView()
+        ZStack {
+            let view = viewFactory.view(for: viewModel.homeState) ?? EmptyView()
             AnyView(view)
         }
     }
 }
 
 #Preview {
-    ContentView()
+    HomeWrapperView()
 }

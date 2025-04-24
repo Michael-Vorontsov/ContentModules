@@ -7,10 +7,11 @@
 
 import SwiftUI
 import MapKit
+import Combine
 
 struct MapView: View {
     let contentBuilder: MapContentBuilding
-    let state: MapState
+    @ObservedObject var state: MapState
     @State var selected: UUID?
 
     var body: some View {

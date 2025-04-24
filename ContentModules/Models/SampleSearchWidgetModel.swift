@@ -51,6 +51,9 @@ class SampleSearchModel {
 class SampleSearchWidgetModel {
     let resultsTableState = TableState(content: [])
     let searchState = SearchState(result: MessageState(title: "Search", message: "Please type in"))
+
+    @Published var mapContent: [any MapPresentableState] = []
+
     let model = SampleSearchModel()
     var bag: Set<AnyCancellable> = []
 
@@ -72,14 +75,25 @@ class SampleSearchWidgetModel {
                         let results = try result.get()
 
                         let rows = results.map { self.row(for: $0) }
+
                         self.resultsTableState.content = rows
                         self.searchState.result = self.resultsTableState
+                        self.mapContent = results.compactMap { self.flag(for: $0) }
+
                     } catch {
                         self.searchState.result = MessageState(title: "Error", message: error.localizedDescription)
                     }
                 }
             }
             .store(in: &bag)
+    }
+
+    func flag(for placemark: CLPlacemark) -> FlagMapState? {
+        guard
+            let locaiton = placemark.location,
+            let name = placemark.name
+        else { return nil }
+        return FlagMapState(coordinate: locaiton.coordinate, name: name, color: Color(hex: 0xFF0000))
     }
 
     func row(for placemark: CLPlacemark) -> AmenityState {

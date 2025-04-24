@@ -19,3 +19,29 @@ public final class HomeBuilder: UIBuilder {
         return HomeView(builder: contentBuilder, state: state)
     }
 }
+
+#Preview {
+    let view = HomeBuilder(contentBuilder: factory)
+        .view(
+            for:HomeState(
+                mapState: MapState(content: []),
+                //            contentState: MessageState(title: "hello", message: "world!")
+                contentState: TableState(
+                    content:  [
+                        MessageState(title: "world", message: "world!"),
+                        MessageState(title: "hello", message: ""),
+                        MessageState(title: "hello", message: "world!"),
+                        MessageState(title: "hello", message: "world!"),
+                        AmenityState(
+                            name: "Shepard's Bush ",
+                            address: "London W3 3QQ",
+                            icon: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!
+                        )
+                    ]
+                )
+            )
+        ) ?? EmptyView()
+
+    AnyView(view)
+}
+

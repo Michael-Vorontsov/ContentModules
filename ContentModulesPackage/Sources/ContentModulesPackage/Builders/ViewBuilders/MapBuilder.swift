@@ -9,11 +9,11 @@ import SwiftUI
 import MapKit
 
 public final class MapBuilder: UIBuilder {
-    init(contentBuilder: any MapContentBuilding) {
+    public init(contentBuilder: any MapContentBuilding) {
         self.contentBuilder = contentBuilder
     }
     
-    let contentBuilder: MapContentBuilding
+    public let contentBuilder: MapContentBuilding
 
 
     public func view(for viewState: any ViewState) -> (any View)? {

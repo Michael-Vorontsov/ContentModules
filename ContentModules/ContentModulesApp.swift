@@ -12,28 +12,25 @@ import ContentModulesPackage
 
 @main
 struct ContentModulesApp: App {
-    let viewModel = SampleSearchWidgetModel()
+//    let viewModel = SampleSearchWidgetModel()
 
-    let viewFactory: ViewFactory = {
-        let factory = ViewFactory()
-        factory.builders = [
-            AmenityBuilder(),
-            ImageBuilder(),
-            SearchBuilder(contentBuilder: factory),
-            GalleryBuilder(contentBuilder: factory),
-            TableBuilder(contentBuilder: factory),
-            MessageBuilder(),
-            HomeBuilder()
-        ]
-        return factory
-    }()
+//    let viewFactory: ViewFactory = {
+//        let factory = ViewFactory()
+//        factory.builders = [
+//            AmenityBuilder(),
+//            ImageBuilder(),
+//            SearchBuilder(contentBuilder: factory),
+//            GalleryBuilder(contentBuilder: factory),
+//            TableBuilder(contentBuilder: factory),
+//            MessageBuilder(),
+//            HomeBuilder(contentBuilder: factory)
+//        ]
+//        return factory
+//    }()
 
     var body: some Scene {
         WindowGroup {
-            ScrollView(.vertical) {
-                let view = viewFactory.view(for: viewModel.searchState) ?? EmptyView()
-                AnyView(view)
-            }
+            HomeWrapperView()
         }
     }
 }
