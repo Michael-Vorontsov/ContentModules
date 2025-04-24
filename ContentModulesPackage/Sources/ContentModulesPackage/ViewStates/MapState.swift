@@ -59,3 +59,21 @@ public struct Color: Hashable {
     
     public let hex: Int
 }
+
+public extension Color {
+    static var black: Color {
+        .init(hex: 0xFFFFFF)
+    }
+
+    static var red: Color {
+        .init(hex: 0xFF0000)
+    }
+
+    static var green : Color {
+        .init(hex: 0x00FF00)
+    }
+
+    static var blue: Color {
+        .init(hex: 0x0000FF)
+    }
+}

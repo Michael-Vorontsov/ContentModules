@@ -1,6 +1,9 @@
 import Combine
+import Foundation
 
-public class SearchState: ObservableObject, ViewState {
+public class SearchState: ObservableObject, ViewState, TablePresentableState {
+    public let id = UUID()
+
     public init(query: String = "", result: (any SearchResultState)? = nil) {
         self.query = query
         self.result = result

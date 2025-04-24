@@ -52,10 +52,13 @@ class SampleSearchWidgetModel {
     let resultsTableState = TableState(content: [])
     let searchState = SearchState(result: MessageState(title: "Search", message: "Please type in"))
 
+    @Published var feedContent: [any TablePresentableState] = []
     @Published var mapContent: [any MapPresentableState] = []
+    @Published var actrive: Bool = false
 
     let model = SampleSearchModel()
     var bag: Set<AnyCancellable> = []
+
 
     init() {
         ready()
@@ -64,11 +67,15 @@ class SampleSearchWidgetModel {
     func ready() {
         searchState.$query
             .debounce(for: 3.0, scheduler: RunLoop.main)
-            .filter{ !$0.isEmpty }
-            .sink { [weak self] query in
-                guard let self else { return }
+            .sink { [unowned self] query in
+                guard !query.isEmpty else {
+                    self.searchState.result = MessageState(title: "Search", message: "Please type in")
+                    self.actrive = false
+                    return
+                }
 
                 self.searchState.result = MessageState(title: "Loading", message: "...")
+                self.actrive = true
 
                 model.search(query: query) { result in
                     do {
@@ -86,6 +93,8 @@ class SampleSearchWidgetModel {
                 }
             }
             .store(in: &bag)
+
+        feedContent = [searchState]
     }
 
     func flag(for placemark: CLPlacemark) -> FlagMapState? {
