@@ -12,7 +12,7 @@ public protocol GalleryPresentableState: ViewState {
     var id: UUID { get }
 }
 
-public class GalleryState: ViewState, TablePresentableState {
+public class GalleryState: ObservableObject, ViewState, TablePresentableState {
     public let id: UUID = UUID()
 
     public

@@ -8,12 +8,7 @@
 import SwiftUI
 
 final public class TableBuilder: UIBuilder {
-    public struct TableContent: Identifiable {
-        public let content: TablePresentableState
-
-        public var id: UUID { content.id }
-    }
-
+  
     public  init(contentBuilder: any UIBuilder) {
         self.contentBuilder = contentBuilder
     }
@@ -24,13 +19,7 @@ final public class TableBuilder: UIBuilder {
             return nil
         }
 
-        let wrappedContent  = state.content.map { TableContent(content: $0) }
-        return VStack {
-            ForEach(wrappedContent) { [contentBuilder] element in
-                let view = contentBuilder.view(for: element.content) ?? EmptyView()
-                AnyView(view)
-            }
-        }
+        return TableView(contentBuilder: contentBuilder, state: state)
     }
 
 }

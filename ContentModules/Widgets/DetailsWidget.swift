@@ -9,9 +9,11 @@ import CoreLocation
 import Foundation
 import ContentModulesPackage
 
-class DetailsWidget {
+class DetailsWidget: ObservableObject {
     @Published var feedContent: [any TablePresentableState] = []
     @Published var mapContent: [any MapPresentableState] = []
+
+    let categoryWidget = CategoriesWidget()
 
     var onClose: (() -> Void)?
 
@@ -26,16 +28,23 @@ class DetailsWidget {
             feedContent = [
                 ZStackState(
                     content: [
-                        AmenityState(name: selectedPlacemark.name ?? "", address: selectedPlacemark.address),
+                        ImageState(.system(name: selectedPlacemark.iconName)),
                         CloseButtonState { [unowned self] in
                             onClose?()
                         }
                     ]
                 ),
-                MessageState(title: "PoI", message: selectedPlacemark.areasOfInterest?.joined(separator: ", ") ?? "none" ),
-                
-                ImageState(.remote(url: selectedPlacemark.iconURL))
+                AmenityState(name: selectedPlacemark.name ?? "", address: selectedPlacemark.address),
             ]
+            if let pois = selectedPlacemark.areasOfInterest, pois.count > 0 {
+                feedContent.append( MessageState(title: "PoI", message: pois.joined(separator: ", ")))
+            }
+
+            if selectedPlacemark.thoroughfare == nil, let location = selectedPlacemark.location?.coordinate {
+                categoryWidget.ready()
+                categoryWidget.coordinate = Coordinate(latitude: location.latitude, longitude: location.longitude)
+                feedContent.append(contentsOf:  categoryWidget.feedContent)
+            }
 
             if let coordinate = selectedPlacemark.location?.coordinate{
                 mapContent = [
