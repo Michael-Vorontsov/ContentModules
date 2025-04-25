@@ -13,7 +13,6 @@ let package = Package(
             targets: ["ContentModulesPackage"]),
     ],
     dependencies: [
-      .package(url: "https://github.com/uber/ios-snapshot-test-case.git", from: "8.0.0"),
       .package(
          url: "https://github.com/pointfreeco/swift-snapshot-testing",
          from: "1.12.0"
@@ -28,7 +27,6 @@ let package = Package(
             name: "ContentModulesPackageTests",
             dependencies: [
                 "ContentModulesPackage",
-                .product(name: "iOSSnapshotTestCase", package: "ios-snapshot-test-case"),
                 .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
             ]
         ),

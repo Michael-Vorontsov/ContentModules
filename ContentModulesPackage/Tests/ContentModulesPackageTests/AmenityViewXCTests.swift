@@ -5,26 +5,19 @@
 //  Created by Michael Vorotnstov on 25/04/2025.
 //
 
-import Testing
+import XCTest
 import SwiftUI
 import UIKit
 import SnapshotTesting
 
 @testable import ContentModulesPackage
 
-protocol SnapshotRecording {
-    var shouldRecord: Bool? { get }
-}
-
-extension SnapshotRecording {
-    var shouldRecord: Bool? { nil }
-}
 
 @MainActor
-struct AmenityViewSnapshotTests: SnapshotRecording {
+class AmenityViewXCTests: XCTestCase, SnapshotRecording {
 
-    @Test("Normal") func testNormal() throws {
-        let state = AmenityState(name: "Apple Store", address: "235 Regent St., London W1B 2EL")
+    func testNormal() {
+        let state = AmenityState(name: "1 Apple Store", address: "235 Regent St., London W1B 2EL")
         let view = AmenityView(state: state)
 
         let hostingVC = UIHostingController(rootView: view)
@@ -32,7 +25,7 @@ struct AmenityViewSnapshotTests: SnapshotRecording {
         assertSnapshot(of: hostingVC, as: .image(on: .iPhone13), record: shouldRecord)
     }
 
-    @Test("Normal content on small screen") func testSmall() throws {
+    func testSmall() {
         let state = AmenityState(name: "Apple Store", address: "235 Regent St., London W1B 2EL")
         let view = AmenityView(state: state)
 
@@ -42,7 +35,7 @@ struct AmenityViewSnapshotTests: SnapshotRecording {
         assertSnapshot(of: hostingVC, as: .image, record: shouldRecord)
     }
 
-    @Test("Long Address") func testLondAddress() throws {
+    func testLondAddress() {
         let state = AmenityState(name: "Apple Store", address: lorem)
         let view = AmenityView(state: state)
 
@@ -52,7 +45,7 @@ struct AmenityViewSnapshotTests: SnapshotRecording {
         assertSnapshot(of: hostingVC, as: .image, record: shouldRecord)
     }
 
-    @Test("Long Name") func testLongName() throws {
+    func testLongName() {
         let state = AmenityState(name: lorem, address: "235 Regent St., London W1B 2EL")
         let view = AmenityView(state: state)
 
@@ -62,7 +55,7 @@ struct AmenityViewSnapshotTests: SnapshotRecording {
         assertSnapshot(of: hostingVC, as: .image, record: shouldRecord)
     }
 
-    @Test("Multiline address") func testMutyline() throws {
+    func testMutyline() {
         let state = AmenityState(name: "Apple Store", address: "235\nRegent St.\nLondon\nW1B 2EL\nUK")
         let view = AmenityView(state: state)
 
@@ -72,7 +65,7 @@ struct AmenityViewSnapshotTests: SnapshotRecording {
         assertSnapshot(of: hostingVC, as: .image, record: shouldRecord)
     }
 
-    @Test("Dark mode") func testDarkModel() throws {
+    func testDarkModel() {
         let state = AmenityState(name: "Apple Store", address: "235 Regent St., London W1B 2EL")
         let view = AmenityView(state: state)
 

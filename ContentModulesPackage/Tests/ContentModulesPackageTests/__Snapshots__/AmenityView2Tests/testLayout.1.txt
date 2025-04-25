@@ -1,0 +1,6 @@
+▿ AmenityView
+  ▿ state: AmenityState
+    - address: "235 Regent St., London W1B 2EL"
+    - icon: https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png
+    - id: 03E3FE3C-CE24-4568-BC43-6812A09C8692
+    - name: "Apple Store 1"
