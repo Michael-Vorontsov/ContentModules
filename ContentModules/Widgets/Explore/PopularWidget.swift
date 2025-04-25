@@ -40,7 +40,7 @@ class PopularWidget {
 
 }
 
-private extension Coordinate {
+extension Coordinate {
     static let london = Coordinate(latitude: 51.5074, longitude: -0.1278)
     static let singapore = Coordinate(latitude: 1.3521, longitude: 103.8198)
     static let birmingham = Coordinate(latitude: 52.4862, longitude: -1.8904)

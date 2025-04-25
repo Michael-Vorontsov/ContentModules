@@ -37,6 +37,7 @@ class ExploreWidget {
 
     let searchWidget = SampleSearchWidgetModel()
     let popularWidget = PopularWidget()
+    let categoriesWidget = CategoriesWidget()
 
     var mode: ContentMode = .defaultContent {
         didSet {
@@ -56,6 +57,7 @@ class ExploreWidget {
         feedBag.removeAll()
         searchWidget.$feedContent
             .combineLatest(popularWidget.$feedContent) { $0 + $1}
+            .combineLatest(categoriesWidget.$feedContent) { $0 + $1 }
             .assign(to: \.feedContent, on: self)
             .store(in: &feedBag)
 
@@ -81,6 +83,8 @@ class ExploreWidget {
     }
 
     func ready() {
+        categoriesWidget.ready()
+
         searchWidget.$actrive
             .dropFirst()
             .sink { [unowned self] in
@@ -100,9 +104,9 @@ class ExploreWidget {
 
 }
 
-private extension Coordinate {
-    static let london = Coordinate(latitude: 51.5074, longitude: -0.1278)
-    static let singapore = Coordinate(latitude: 1.3521, longitude: 103.8198)
-    static let birmingham = Coordinate(latitude: 52.4862, longitude: -1.8904)
-    static let tokyo = Coordinate(latitude: 35.6762, longitude: 139.6503)
-}
+//private extension Coordinate {
+//    static let london = Coordinate(latitude: 51.5074, longitude: -0.1278)
+//    static let singapore = Coordinate(latitude: 1.3521, longitude: 103.8198)
+//    static let birmingham = Coordinate(latitude: 52.4862, longitude: -1.8904)
+//    static let tokyo = Coordinate(latitude: 35.6762, longitude: 139.6503)
+//}

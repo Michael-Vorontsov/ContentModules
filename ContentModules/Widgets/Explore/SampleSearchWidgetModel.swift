@@ -12,11 +12,11 @@ import ContentModulesPackage
 class SampleSearchModel {
     private let geocoder = CLGeocoder()
 
-    func search(query: String, completion: @escaping (Result<[CLPlacemark], Error>) -> Void) {
+    func search(coordinate: Coordinate, query: String, completion: @escaping (Result<[CLPlacemark], Error>) -> Void) {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = query  // e.g., "coffee", "museum"
         request.region = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 51.0, longitude: 0),
+            center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
             latitudinalMeters: 50000,
             longitudinalMeters: 50000
         )
@@ -80,7 +80,7 @@ class SampleSearchWidgetModel {
                 self.searchState.result = MessageState(title: "Loading", message: "...")
                 self.actrive = true
 
-                model.search(query: query) { result in
+                model.search(coordinate: .london, query: query) { result in
                     do {
                         let results = try result.get()
 
