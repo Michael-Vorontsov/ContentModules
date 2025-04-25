@@ -166,13 +166,13 @@ extension CLPlacemark {
 extension CLPlacemark {
 
     var iconName: String {
-        if let subThoroughfare = subThoroughfare, thoroughfare != nil {
+        if subThoroughfare != nil, thoroughfare != nil {
             // Street address
             return "house"
-        } else if let locality = locality, administrativeArea != nil {
+        } else if locality != nil, administrativeArea != nil {
             // City
             return "building.2"
-        } else if let country = country, locality == nil {
+        } else if country != nil, locality == nil {
             // Country without city (e.g., just the country)
             return "globe"
         } else if inlandWater != nil {
