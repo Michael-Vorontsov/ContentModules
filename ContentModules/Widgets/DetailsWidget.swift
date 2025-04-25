@@ -10,23 +10,39 @@ import Foundation
 import ContentModulesPackage
 
 class DetailsWidget {
-    @Published var feed: [any TablePresentableState] = []
-    @Published var isActive: Bool = false
+    @Published var feedContent: [any TablePresentableState] = []
+    @Published var mapContent: [any MapPresentableState] = []
+
+    var onClose: (() -> Void)?
 
     var selectedPlacemark: CLPlacemark? {
         didSet {
             guard let selectedPlacemark else {
-                feed = []
-                isActive = false
+                feedContent = []
+                mapContent = []
                 return
             }
 
-            isActive = true
-            feed = [
-                AmenityState(name: selectedPlacemark.name ?? "", address: selectedPlacemark.address),
+            feedContent = [
+                ZStackState(
+                    content: [
+                        AmenityState(name: selectedPlacemark.name ?? "", address: selectedPlacemark.address),
+                        CloseButtonState { [unowned self] in
+                            onClose?()
+                        }
+                    ]
+                ),
                 MessageState(title: "PoI", message: selectedPlacemark.areasOfInterest?.joined(separator: ", ") ?? "none" ),
-                ImageState(url: selectedPlacemark.iconURL)
+                
+                ImageState(.remote(url: selectedPlacemark.iconURL))
             ]
+
+            if let coordinate = selectedPlacemark.location?.coordinate{
+                mapContent = [
+                    FlagMapState(coordinate: coordinate, name: selectedPlacemark.name ?? "", color: .red)
+                ]
+            }
+
         }
     }
 

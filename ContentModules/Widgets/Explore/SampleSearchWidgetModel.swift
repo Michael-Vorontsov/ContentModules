@@ -50,7 +50,7 @@ class SampleSearchModel {
 
 class SampleSearchWidgetModel {
     let resultsTableState = TableState(content: [])
-    let searchState = SearchState(result: MessageState(title: "Search", message: "Please type in"))
+    let searchState = SearchState(result: nil)
 
     @Published var selectedResult: CLPlacemark?
 
@@ -71,7 +71,7 @@ class SampleSearchWidgetModel {
             .debounce(for: 3.0, scheduler: RunLoop.main)
             .sink { [unowned self] query in
                 guard !query.isEmpty else {
-                    self.searchState.result = MessageState(title: "Search", message: "Please type in")
+                    self.searchState.result = nil
                     self.mapContent = []
                     self.actrive = false
                     return
@@ -123,7 +123,7 @@ class SampleSearchWidgetModel {
         return AmenityState(
             name: placemark.name ?? "-",
             address: addressString,
-            icon: placemark.iconURL
+            icon: .system(name: placemark.iconName)
         )
     }
 }
@@ -158,6 +158,35 @@ extension CLPlacemark {
             return URL(string: baseURL + "city.png")!
         } else {
             return URL(string: baseURL + "default.png")!
+        }
+    }
+}
+
+
+extension CLPlacemark {
+
+    var iconName: String {
+        if let subThoroughfare = subThoroughfare, thoroughfare != nil {
+            // Street address
+            return "house"
+        } else if let locality = locality, administrativeArea != nil {
+            // City
+            return "building.2"
+        } else if let country = country, locality == nil {
+            // Country without city (e.g., just the country)
+            return "globe"
+        } else if inlandWater != nil {
+            // Lake, river, etc.
+            return "drop"
+        } else if ocean != nil {
+            // Ocean
+            return "wave.3.forward"
+        } else if let name = name, name.contains("Airport") {
+            // Example for airports
+            return "airplane"
+        } else {
+            // Default for other cases
+            return "mappin.and.ellipse"
         }
     }
 }

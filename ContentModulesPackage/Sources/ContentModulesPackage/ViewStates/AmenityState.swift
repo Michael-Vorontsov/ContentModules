@@ -8,16 +8,27 @@
 import Foundation
 
 public struct AmenityState: ViewState, TablePresentableState {
-    public init(id: UUID = UUID(), name: String, address: String, icon: URL = URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!) {
-        self.id = id
+    public init(
+        name: String,
+        address: String,
+        icon: ImageState.Image
+    ) {
         self.name = name
         self.address = address
         self.icon = icon
     }
-    
-    public var id: UUID  = UUID()
+
+    public init(
+        name: String,
+        address: String,
+        url: URL = URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!
+    ) {
+        self.init(name: name, address: address, icon: .remote(url: url))
+    }
+
+    public let id: UUID  = UUID()
 
     public let name: String
     public let address: String
-    public let icon: URL
+    public let icon: ImageState.Image
 }

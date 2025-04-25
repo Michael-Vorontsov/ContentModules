@@ -43,8 +43,8 @@ public final class GalleryBuilder: UIBuilder {
     let view = GalleryBuilder(contentBuilder: ImageBuilder()).view(
         for: GalleryState(
             content: [
-                ImageState( url: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!),
-                ImageState( url: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!),
+                ImageState( .remote(url: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!)),
+                ImageState( .remote(url:  URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!)),
             ]
         )
     ) ?? EmptyView()

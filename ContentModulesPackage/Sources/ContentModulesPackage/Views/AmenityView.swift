@@ -13,12 +13,27 @@ struct AmenityView: View {
     var body: some View {
         ZStack {
             HStack {
-                AsyncImage(url: state.icon){ result in
-                    result.image?
+                switch state.icon {
+                case .system(let name):
+                    Image(systemName: name)
                         .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
+
+                case .data(let data):
+                    Image(uiImage: UIImage(data: data)!)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
+
+                case .remote(let url):
+                    AsyncImage(url: url){ result in
+                        result.image?
+                            .resizable()
+                    }
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
                 }
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 50)
                 Spacer()
                 VStack(alignment: .leading) {
                     Text(state.name)
@@ -43,7 +58,7 @@ struct AmenityView: View {
         state: .init(
             name: "Shepard's Bush ",
             address: "London W3 3QQ",
-            icon: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!
+            icon: .remote(url: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!)
         )
     )
 }

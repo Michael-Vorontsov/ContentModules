@@ -35,7 +35,7 @@ public final class HomeBuilder: UIBuilder {
                         AmenityState(
                             name: "Shepard's Bush ",
                             address: "London W3 3QQ",
-                            icon: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!
+                            icon: .remote(url: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!)
                         )
                     ]
                 )

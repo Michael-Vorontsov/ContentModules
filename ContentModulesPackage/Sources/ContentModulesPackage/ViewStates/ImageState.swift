@@ -8,11 +8,17 @@
 import Foundation
 
 public struct ImageState: ViewState, GalleryPresentableState, TablePresentableState {
-    public  init(url: URL) {
-        self.url = url
+    public enum Image {
+        case system(name: String)
+        case data(data: Data)
+        case remote(url: URL)
+    }
+
+    public  init(_ image: Image) {
+        self.image = image
     }
     
     public let id = UUID()
 
-    public let url: URL
+    public let image: Image
 }

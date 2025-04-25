@@ -12,7 +12,11 @@
         ImageBuilder(),
         GalleryBuilder(contentBuilder: factory),
         TableBuilder(contentBuilder: factory),
-        MapBuilder(contentBuilder: mapFactory)
+        MapBuilder(contentBuilder: mapFactory),
+        ZStackBuilder(contentBuilder: factory),
+        CloseButtonBuilder(),
+        HomeBuilder(contentBuilder: factory),
+        SearchBuilder(contentBuilder: factory)
     ]
     return factory
 }()

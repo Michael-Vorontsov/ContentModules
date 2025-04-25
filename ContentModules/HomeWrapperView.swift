@@ -22,7 +22,9 @@ struct HomeWrapperView: View {
             TableBuilder(contentBuilder: factory),
             MessageBuilder(),
             MapBuilder(contentBuilder: FlagBuilder()),
-            HomeBuilder(contentBuilder: factory)
+            HomeBuilder(contentBuilder: factory),
+            CloseButtonBuilder(),
+            ZStackBuilder(contentBuilder: factory)
         ]
         return factory
     }()

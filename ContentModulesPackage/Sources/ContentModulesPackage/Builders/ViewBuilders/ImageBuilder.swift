@@ -13,12 +13,40 @@ public final class ImageBuilder: UIBuilder {
     public func view(for viewState: any ViewState) -> (any View)? {
         guard let state = viewState as? ImageState else { return nil }
 
-        return AsyncImage(url: state.url){ result in
-            result.image?
+        switch state.image {
+        case .system(let name):
+            return Image(systemName: name)
                 .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 100, height: 100)
+
+        case .data(let data):
+
+            return Image(uiImage: UIImage(data: data)!)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 100, height: 100)
+
+        case .remote(let url):
+            return AsyncImage(url: url){ result in
+                result.image?
+                    .resizable()
+            }
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 100, height: 100)
         }
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 100, height: 100)
     }
 
+}
+
+
+#Preview {
+    let view = GalleryBuilder(contentBuilder: ImageBuilder()).view(
+        for: GalleryState(
+            content: [
+                ImageState(.system(name: "home"))
+            ]
+        )
+    ) ?? EmptyView()
+    view
 }

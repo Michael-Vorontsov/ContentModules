@@ -36,12 +36,6 @@ struct HomeView: View {
                         let view = builder.view(for: state.contentState)?.padding() ?? EmptyView()
                         AnyView(view)
                     }
-//                    .frame(
-//                        width: geometry.size.width,
-//                        height: geometry.size.height / 3,
-//                    )
-//                    .background(.green)
-//                    .offset(y: geometry.size.height * 2/3)
                 }
             }
         }
@@ -66,7 +60,7 @@ struct HomeView: View {
                     AmenityState(
                         name: "Shepard's Bush ",
                         address: "London W3 3QQ",
-                        icon: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!
+                        url: URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!
                     )
                 ]
             )
