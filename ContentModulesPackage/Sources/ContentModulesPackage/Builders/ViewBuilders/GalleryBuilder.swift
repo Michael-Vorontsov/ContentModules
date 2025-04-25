@@ -27,14 +27,18 @@ public final class GalleryBuilder: UIBuilder {
         }
 
         let wrappedContent  = state.content.map { GalleryContent(content: $0) }
-        return ScrollView(.horizontal) {
-            HStack {
-                ForEach(wrappedContent) { [contentBuilder] element in
-                    let view = contentBuilder.view(for: element.content) ?? EmptyView()
-                    AnyView(view)
+
+        return
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(wrappedContent) { [contentBuilder] element in
+                        let view = contentBuilder.view(for: element.content) ?? EmptyView()
+                        AnyView(view)
+                            .frame(width: UIScreen.main.bounds.width * 0.85)
+                    }
                 }
             }
-        }
+
     }
 
 }
