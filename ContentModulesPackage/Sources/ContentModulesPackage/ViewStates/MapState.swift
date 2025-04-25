@@ -25,20 +25,6 @@ public protocol MapPresentableState: Hashable, ViewState, Identifiable {
     var id: UUID { get }
 }
 
-
-public struct FlagMapState: MapPresentableState {
-    public init(coordinate: Coordinate, name: String, color: Color) {
-        self.coordinate = coordinate
-        self.name = name
-        self.color = color
-    }
-    
-    public let id = UUID()
-    public let coordinate: Coordinate
-    public let name: String
-    public let color: Color
-}
-
 public typealias Coordinate = CLLocationCoordinate2D
 
 extension Coordinate: @retroactive Hashable {

@@ -52,6 +52,8 @@ class SampleSearchWidgetModel {
     let resultsTableState = TableState(content: [])
     let searchState = SearchState(result: MessageState(title: "Search", message: "Please type in"))
 
+    @Published var selectedResult: CLPlacemark?
+
     @Published var feedContent: [any TablePresentableState] = []
     @Published var mapContent: [any MapPresentableState] = []
     @Published var actrive: Bool = false
@@ -98,12 +100,14 @@ class SampleSearchWidgetModel {
         feedContent = [searchState]
     }
 
-    func flag(for placemark: CLPlacemark) -> FlagMapState? {
+    func flag(for placemark: CLPlacemark) -> (any MapPresentableState)? {
         guard
             let locaiton = placemark.location,
             let name = placemark.name
         else { return nil }
-        return FlagMapState(coordinate: locaiton.coordinate, name: name, color: Color(hex: 0xFF0000))
+        return FlagMapState(coordinate: locaiton.coordinate, name: name, color: Color(hex: 0xFF0000)).onSelect { [weak self] in
+            self?.selectedResult = placemark
+        }
     }
 
     func row(for placemark: CLPlacemark) -> AmenityState {

@@ -11,6 +11,7 @@ import Combine
 class HomeWidgetModel {
     let searchWidget: SampleSearchWidgetModel = .init()
     let exploreWidget: ExploreWidget = .init()
+    let detailsWidget = DetailsWidget()
 
     let mapState = MapState(content: [])
     @Published var content: ViewState = MessageState(title: "Hello", message: "World!")
@@ -33,16 +34,13 @@ class HomeWidgetModel {
 
         searchWidget
             .$feedContent
-            .combineLatest(exploreWidget.$feedContent)
-//            .feedContent.publisher.merge(with: exploreWidget.$feedContent)
+            .combineLatest(exploreWidget.$feedContent, detailsWidget.$feed)
             .map {
-                var a = $0.0
+                var a = $0.2
+                a.append(contentsOf: $0.0)
                 a.append(contentsOf: $0.1)
                 return a
-//                [$0.0, $0.1].flatMap { [$0] }
             }
-//            .merge(with: exploreWidget.$feedContent)
-
             .sink {[unowned self] in
                 homeState.contentState = TableState(content: $0)
             }
@@ -53,6 +51,13 @@ class HomeWidgetModel {
                 exploreWidget.active = !$0
             }
             .store(in: &bag)
+
+        searchWidget.$selectedResult
+            .sink {[detailsWidget] in
+                detailsWidget.selectedPlacemark = $0
+            }
+            .store(in: &bag)
+
 //        searchWidget.$mapContent
 //            .assign(to: \.content, on: mapState)
 //            .store(in: &bag)

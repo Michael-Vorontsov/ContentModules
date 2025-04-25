@@ -29,6 +29,11 @@ struct MapView: View {
             if let selectedContent {
                 print(selectedContent)
             }
+
+            if let selectable = selectedContent as? any Selectable {
+                selectable.didSelect()
+            }
+            
             state.selected = selectedContent
         }
     }

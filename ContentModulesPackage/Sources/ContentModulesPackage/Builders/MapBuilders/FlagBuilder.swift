@@ -12,7 +12,7 @@ public class FlagBuilder: MapContentBuilding {
     public init() {}
     
     public func annotation(for viewState: any MapPresentableState) -> (AnyMapContent)? {
-        guard let state = viewState as? FlagMapState else { return nil }
+        guard let state = viewState as? FlagMapState ?? (viewState as? SelectableViewState<FlagMapState>)?.content else { return nil }
 
         return AnyMapContent(
             Marker(coordinate: state.coordinate) {
