@@ -194,36 +194,22 @@
             endingLineNumber = "29"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "9112E52E-82F5-4731-88AB-2AC7B74CAA1E - 25a96d45292c1cff"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;Foundation.UUID&gt;, Swift.Optional&lt;Foundation.UUID&gt;) -&gt; () in ContentModulesPackage.MapView.body.getter : some"
-                  moduleName = "ContentModules.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/michael/Projects/Solo/ContentModules/ContentModulesPackage/Sources/ContentModulesPackage/Views/MapView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29">
-               </Location>
-               <Location
-                  uuid = "9112E52E-82F5-4731-88AB-2AC7B74CAA1E - 25a96d45292c1cff"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Optional&lt;Foundation.UUID&gt;, Swift.Optional&lt;Foundation.UUID&gt;) -&gt; () in ContentModulesPackage.MapView.body.getter : some"
-                  moduleName = "ContentModules.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/michael/Projects/Solo/ContentModules/ContentModulesPackage/Sources/ContentModulesPackage/Views/MapView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9BD1CD31-4407-43B0-B62F-658917795AC7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../Library/Developer/Xcode/DerivedData/ContentModules-dynyeqikntksisfrearwmhxdfchj/SourcePackages/checkouts/ios-snapshot-test-case/src/iOSSnapshotTestCase/SwiftSupport.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "FBSnapshotVerifyViewOrLayer(_:identifier:suffixes:perPixelTolerance:overallTolerance:file:line:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

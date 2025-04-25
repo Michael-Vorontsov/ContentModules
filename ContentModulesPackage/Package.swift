@@ -12,6 +12,13 @@ let package = Package(
             name: "ContentModulesPackage",
             targets: ["ContentModulesPackage"]),
     ],
+    dependencies: [
+      .package(url: "https://github.com/uber/ios-snapshot-test-case.git", from: "8.0.0"),
+      .package(
+         url: "https://github.com/pointfreeco/swift-snapshot-testing",
+         from: "1.12.0"
+       ),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
@@ -19,7 +26,11 @@ let package = Package(
             name: "ContentModulesPackage"),
         .testTarget(
             name: "ContentModulesPackageTests",
-            dependencies: ["ContentModulesPackage"]
+            dependencies: [
+                "ContentModulesPackage",
+                .product(name: "iOSSnapshotTestCase", package: "ios-snapshot-test-case"),
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+            ]
         ),
     ]
 )

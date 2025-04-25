@@ -23,6 +23,7 @@ struct AmenityView: View {
                 VStack(alignment: .leading) {
                     Text(state.name)
                         .font(.headline)
+                        .lineLimit(1)
                     Text(state.address)
                         .font(.caption)
                 }
