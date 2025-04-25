@@ -11,7 +11,7 @@ public struct AmenityState: ViewState, TablePresentableState {
     public init(
         name: String,
         address: String,
-        icon: ImageState.Image
+        icon: ImageState.Image = .system(name: "globe")
     ) {
         self.name = name
         self.address = address
@@ -21,7 +21,7 @@ public struct AmenityState: ViewState, TablePresentableState {
     public init(
         name: String,
         address: String,
-        url: URL = URL(string: "https://www.myiconstory.com/wp-content/uploads/2018/08/Shepherds-Bush.png")!
+        url: URL
     ) {
         self.init(name: name, address: address, icon: .remote(url: url))
     }

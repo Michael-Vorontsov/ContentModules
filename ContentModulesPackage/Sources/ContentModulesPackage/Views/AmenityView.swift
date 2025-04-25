@@ -46,7 +46,7 @@ struct AmenityView: View {
             }
         }
         .padding()
-        .border(.black, width: 1)
+        .border(.primary, width: 1)
         .padding()
     }
 }
